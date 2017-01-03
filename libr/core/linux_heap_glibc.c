@@ -339,11 +339,11 @@ void GH(print_heap_chunk)(RCore *core) {
 	if (data) {
 		r_core_read_at (core, chunk + SZ * 2, (ut8 *)data, size);
 
-        bool is_free = (*(long unsigned*)(data+size-SZ) & 1) == 0;
-        if (is_free)
-            size -= SZ * 2; // don't show nextchunk->prev_size and nextchunk->size
-        else
-            size -= SZ;     // don't show nextchunk->size, but do show nextchunk->prev_size because we own it
+		bool is_free = (*(long unsigned*)(data+size-SZ) & 1) == 0;
+		if (is_free)
+			size -= SZ * 2; // don't show nextchunk->prev_size and nextchunk->size
+		else
+			size -= SZ;     // don't show nextchunk->size, but do show nextchunk->prev_size because we own it
 
 		PRINT_GA ("chunk data = \n");
 		r_print_hexdump (core->print, chunk + SZ * 2, (ut8 *)data, size, SZ * 8, SZ);
